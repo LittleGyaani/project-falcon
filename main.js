@@ -36,3 +36,10 @@ class BlockChain {
         this.chain.push(newBlock);
     }
 }
+
+//Craete my Crypto Coin
+let falconCoin = new BlockChain();
+falconCoin._addNewBlock(new Block(1, '20/04/2020', { amount: 5 }));
+falconCoin._addNewBlock(new Block(2, '22/04/2020', { amount: 15 }));
+
+console.log(JSON.stringify(falconCoin, null, 5));
