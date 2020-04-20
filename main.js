@@ -35,6 +35,21 @@ class BlockChain {
         newBlock.hash = newBlock._calculateHash();
         this.chain.push(newBlock);
     }
+
+    _isChainvalid() {
+        for (let i = 1; i < this.chain.length; i++) {
+            const currentBlock = this.chain[i];
+            const previousBlock = this.chain[i - 1];
+
+            if (currentBlock.hash != currentBlock._calculateHash())
+                return false;
+
+            if (currentBlock.previousHash != previousBlock.hash)
+                return false;
+        }
+
+        return true;
+    }
 }
 
 //Craete my Crypto Coin
@@ -42,4 +57,13 @@ let falconCoin = new BlockChain();
 falconCoin._addNewBlock(new Block(1, '20/04/2020', { amount: 5 }));
 falconCoin._addNewBlock(new Block(2, '22/04/2020', { amount: 15 }));
 
-console.log(JSON.stringify(falconCoin, null, 5));
+//Check if Block Chain is valid
+console.log('Is chain Valid?' + ' ' + falconCoin._isChainvalid());
+
+//Chaning Block Chain Data
+falconCoin.chain[2].data = { amount: 500 };
+
+//Relog the Block Chain Validity
+console.log('Is chain Valid?' + ' ' + falconCoin._isChainvalid());
+
+// console.log(JSON.stringify(falconCoin, null, 5));
